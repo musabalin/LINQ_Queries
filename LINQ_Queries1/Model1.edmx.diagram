@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="51f08dabb5214e329c64b40043083500" Name="Diagram1">
+        <EntityTypeShape EntityType="Dbo_EntityFrameworkDemoModel.Tbl_Clups" Width="1.5" PointX="8" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dbo_EntityFrameworkDemoModel.Tbl_CourseGrades" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dbo_EntityFrameworkDemoModel.Tbl_Lessons" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dbo_EntityFrameworkDemoModel.Tbl_Student" Width="1.5" PointX="5.625" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="Dbo_EntityFrameworkDemoModel.FK_Tbl_CourseGrades_Tbl_Lessons" ManuallyRouted="false" />
+        <AssociationConnector Association="Dbo_EntityFrameworkDemoModel.FK_Tbl_CourseGrades_Tbl_Student" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

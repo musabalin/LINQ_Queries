@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Dbo_EntityFrameworkDemoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Tbl_Clups">
+          <Key>
+            <PropertyRef Name="ClupID" />
+          </Key>
+          <Property Name="ClupID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClupName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Tbl_CourseGrades">
+          <Key>
+            <PropertyRef Name="CGID" />
+          </Key>
+          <Property Name="CGID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Student" Type="int" />
+          <Property Name="Lesson" Type="int" />
+          <Property Name="CourseGrade1" Type="smallint" />
+          <Property Name="CourseGrade2" Type="smallint" />
+          <Property Name="CourseGrade3" Type="smallint" />
+          <Property Name="Average" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="Tbl_Lessons">
+          <Key>
+            <PropertyRef Name="LessonID" />
+          </Key>
+          <Property Name="LessonID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LessonName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Tbl_Student">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="Image" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_Tbl_CourseGrades_Tbl_Lessons">
+          <End Role="Tbl_Lessons" Type="Self.Tbl_Lessons" Multiplicity="0..1" />
+          <End Role="Tbl_CourseGrades" Type="Self.Tbl_CourseGrades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Lessons">
+              <PropertyRef Name="LessonID" />
+            </Principal>
+            <Dependent Role="Tbl_CourseGrades">
+              <PropertyRef Name="Lesson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_CourseGrades_Tbl_Student">
+          <End Role="Tbl_Student" Type="Self.Tbl_Student" Multiplicity="0..1" />
+          <End Role="Tbl_CourseGrades" Type="Self.Tbl_CourseGrades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Student">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_CourseGrades">
+              <PropertyRef Name="Student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Dbo_EntityFrameworkDemoModelStoreContainer">
+          <EntitySet Name="Tbl_Clups" EntityType="Self.Tbl_Clups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_CourseGrades" EntityType="Self.Tbl_CourseGrades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Lessons" EntityType="Self.Tbl_Lessons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Student" EntityType="Self.Tbl_Student" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Tbl_CourseGrades_Tbl_Lessons" Association="Self.FK_Tbl_CourseGrades_Tbl_Lessons">
+            <End Role="Tbl_Lessons" EntitySet="Tbl_Lessons" />
+            <End Role="Tbl_CourseGrades" EntitySet="Tbl_CourseGrades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_CourseGrades_Tbl_Student" Association="Self.FK_Tbl_CourseGrades_Tbl_Student">
+            <End Role="Tbl_Student" EntitySet="Tbl_Student" />
+            <End Role="Tbl_CourseGrades" EntitySet="Tbl_CourseGrades" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Dbo_EntityFrameworkDemoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Tbl_Clups">
+          <Key>
+            <PropertyRef Name="ClupID" />
+          </Key>
+          <Property Name="ClupID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClupName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Tbl_CourseGrades">
+          <Key>
+            <PropertyRef Name="CGID" />
+          </Key>
+          <Property Name="CGID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Student" Type="Int32" />
+          <Property Name="Lesson" Type="Int32" />
+          <Property Name="CourseGrade1" Type="Int16" />
+          <Property Name="CourseGrade2" Type="Int16" />
+          <Property Name="CourseGrade3" Type="Int16" />
+          <Property Name="Average" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="Tbl_Lessons" Relationship="Self.FK_Tbl_CourseGrades_Tbl_Lessons" FromRole="Tbl_CourseGrades" ToRole="Tbl_Lessons" />
+          <NavigationProperty Name="Tbl_Student" Relationship="Self.FK_Tbl_CourseGrades_Tbl_Student" FromRole="Tbl_CourseGrades" ToRole="Tbl_Student" />
+        </EntityType>
+        <EntityType Name="Tbl_Lessons">
+          <Key>
+            <PropertyRef Name="LessonID" />
+          </Key>
+          <Property Name="LessonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LessonName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tbl_CourseGrades" Relationship="Self.FK_Tbl_CourseGrades_Tbl_Lessons" FromRole="Tbl_Lessons" ToRole="Tbl_CourseGrades" />
+        </EntityType>
+        <EntityType Name="Tbl_Student">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tbl_CourseGrades" Relationship="Self.FK_Tbl_CourseGrades_Tbl_Student" FromRole="Tbl_Student" ToRole="Tbl_CourseGrades" />
+        </EntityType>
+        <Association Name="FK_Tbl_CourseGrades_Tbl_Lessons">
+          <End Role="Tbl_Lessons" Type="Self.Tbl_Lessons" Multiplicity="0..1" />
+          <End Role="Tbl_CourseGrades" Type="Self.Tbl_CourseGrades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Lessons">
+              <PropertyRef Name="LessonID" />
+            </Principal>
+            <Dependent Role="Tbl_CourseGrades">
+              <PropertyRef Name="Lesson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_CourseGrades_Tbl_Student">
+          <End Role="Tbl_Student" Type="Self.Tbl_Student" Multiplicity="0..1" />
+          <End Role="Tbl_CourseGrades" Type="Self.Tbl_CourseGrades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Student">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_CourseGrades">
+              <PropertyRef Name="Student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Dbo_EntityFrameworkDemoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Tbl_Clups" EntityType="Self.Tbl_Clups" />
+          <EntitySet Name="Tbl_CourseGrades" EntityType="Self.Tbl_CourseGrades" />
+          <EntitySet Name="Tbl_Lessons" EntityType="Self.Tbl_Lessons" />
+          <EntitySet Name="Tbl_Student" EntityType="Self.Tbl_Student" />
+          <AssociationSet Name="FK_Tbl_CourseGrades_Tbl_Lessons" Association="Self.FK_Tbl_CourseGrades_Tbl_Lessons">
+            <End Role="Tbl_Lessons" EntitySet="Tbl_Lessons" />
+            <End Role="Tbl_CourseGrades" EntitySet="Tbl_CourseGrades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_CourseGrades_Tbl_Student" Association="Self.FK_Tbl_CourseGrades_Tbl_Student">
+            <End Role="Tbl_Student" EntitySet="Tbl_Student" />
+            <End Role="Tbl_CourseGrades" EntitySet="Tbl_CourseGrades" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Dbo_EntityFrameworkDemoModelStoreContainer" CdmEntityContainer="Dbo_EntityFrameworkDemoEntities">
+          <EntitySetMapping Name="Tbl_Clups">
+            <EntityTypeMapping TypeName="Dbo_EntityFrameworkDemoModel.Tbl_Clups">
+              <MappingFragment StoreEntitySet="Tbl_Clups">
+                <ScalarProperty Name="ClupID" ColumnName="ClupID" />
+                <ScalarProperty Name="ClupName" ColumnName="ClupName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_CourseGrades">
+            <EntityTypeMapping TypeName="Dbo_EntityFrameworkDemoModel.Tbl_CourseGrades">
+              <MappingFragment StoreEntitySet="Tbl_CourseGrades">
+                <ScalarProperty Name="CGID" ColumnName="CGID" />
+                <ScalarProperty Name="Student" ColumnName="Student" />
+                <ScalarProperty Name="Lesson" ColumnName="Lesson" />
+                <ScalarProperty Name="CourseGrade1" ColumnName="CourseGrade1" />
+                <ScalarProperty Name="CourseGrade2" ColumnName="CourseGrade2" />
+                <ScalarProperty Name="CourseGrade3" ColumnName="CourseGrade3" />
+                <ScalarProperty Name="Average" ColumnName="Average" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Lessons">
+            <EntityTypeMapping TypeName="Dbo_EntityFrameworkDemoModel.Tbl_Lessons">
+              <MappingFragment StoreEntitySet="Tbl_Lessons">
+                <ScalarProperty Name="LessonID" ColumnName="LessonID" />
+                <ScalarProperty Name="LessonName" ColumnName="LessonName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Student">
+            <EntityTypeMapping TypeName="Dbo_EntityFrameworkDemoModel.Tbl_Student">
+              <MappingFragment StoreEntitySet="Tbl_Student">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
