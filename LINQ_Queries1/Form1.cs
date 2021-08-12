@@ -19,8 +19,28 @@ namespace LINQ_Queries1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Dbo_EntityFrameworkDemoEntities c = new Dbo_EntityFrameworkDemoEntities();
-            dataGridView1.DataSource = c.Tbl_CourseGrades.ToList();
+            Dbo_EntityFrameworkDemoEntities db = new Dbo_EntityFrameworkDemoEntities();
+            if (radioButton1.Checked == true)
+            {
+                dataGridView1.DataSource = db.Tbl_CourseGrades.Select(y => new { Name = y.CourseGrade1 }).Where(x => x.Name <= 50).ToList();
+            }
+            if (radioButton2.Checked == true)
+            {
+                if (textBox1.Text != "")
+                {
+                    dataGridView1.DataSource = db.Tbl_Student.Select(
+                        x => new
+                        {
+                            FirstName = x.FirstName,
+                            LastName = x.LastName
+                        }).Where(x => x.FirstName == textBox1.Text | x.LastName == textBox1.Text).ToList();
+                }
+                else
+                {
+                    MessageBox.Show("Enter name or surname");
+                }
+            }
+
         }
     }
 }
